@@ -154,6 +154,7 @@ var config = {
                 ticks: {},
             }]
         },
+        maintainAspectRatio: false,
         animation: {
             onProgress: drawBarValues,
             onComplete: drawBarValues
