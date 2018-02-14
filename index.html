@@ -1,0 +1,61 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style type='text/css'>
+    body {
+        margin: 10px;
+        padding: 10px;
+    }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+    <link href="https://sdkcarlos.github.io/sites/holdon-resources/css/HoldOn.css" rel="stylesheet">
+    <script src="https://sdkcarlos.github.io/sites/holdon-resources/js/HoldOn.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
+
+    <script src="app.js"></script>
+  </head>
+  <body>
+    <div class="row">
+      <div class="col-4">
+        <div class="input-group">
+          <input type="text" id="address" class="form-control" placeholder="輸入鄰近地址">
+          <span class="input-group-btn">
+            <button id="search" class="btn btn-secondary" type="button">Search</button>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div id="nearby" class="row"></div>
+
+    <br>
+    <br>
+
+    <div class="input-group">
+      <select id="station" class="form-control col-2">
+        <option value="" selected>請選擇氣象站</option>
+      </select>
+      <select id="start_year" class="form-control col-1">
+        <option value="" selected></option>
+      </select>
+      至
+      <select id="end_year" class="form-control col-1">
+        <option value="" selected></option>
+      </select>
+      <button id="draw" type="button">Draw</button>
+      <button id="clear" type="button">Clear</button>
+    </div>
+
+    <br>
+
+    <div id="chart-container" style="width:75%; margin:0 auto;"><canvas id="chart"></canvas></div>
+  </body>
+</html>
