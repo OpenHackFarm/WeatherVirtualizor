@@ -161,19 +161,19 @@ var config = {
     }
 };
 var config_temperature = $.extend(true, {}, config);
-config_temperature['options']['title']['text'] = '歷史平均溫度';
+config_temperature['options']['title']['text'] = '歷史平均溫度 (℃)';
 config_temperature['options']['scales']['yAxes'][0]['scaleLabel']['labelString'] = 'Temperature';
 config_temperature['options']['scales']['yAxes'][0]['ticks'] = {min: 8, max: 32};
 
 var config_rain = $.extend(true, {}, config);
-config_rain['options']['title']['text'] = '歷史降雨量統計';
+config_rain['options']['title']['text'] = '歷史降雨量統計 (mm)';
 config_rain['options']['scales']['yAxes'][0]['scaleLabel']['labelString'] = 'Rain';
 config_rain['options']['scales']['yAxes'][0]['ticks'] = {min: 0, max: 900};
 
 var config_sun = $.extend(true, {}, config);
-config_sun['options']['title']['text'] = '歷史日射量統計';
+config_sun['options']['title']['text'] = '歷史日射量統計 (MJ/㎡)';
 config_sun['options']['scales']['yAxes'][0]['scaleLabel']['labelString'] = 'Sun';
-config_sun['options']['scales']['yAxes'][0]['ticks'] = {min: 0, max: 700};
+config_sun['options']['scales']['yAxes'][0]['ticks'] = {min: 0, max: 800};
 
 $(function() {
     $.getJSON(station_url, function(data) {
