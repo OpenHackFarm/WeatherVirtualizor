@@ -11,6 +11,9 @@ function search_nearby_station(address) {
             $.each(data, function(idx, li) {
                 if (li['distance_km'] < 10) {
                     text = li['station_id'] + '_' + li['station_name'] + ' - ' + li['distance_km'] + 'km';
+                    if(li['start_date'] < '2005') {
+                      text = '<b>' + text + '</b>';
+                    }
                     button = '<button class="station_choose" data-station="' + li['station_id'] + '_' + li['station_name'] + '" type="button">選擇</button>'
                     $('#nearby').append('<div class="col-4">' + button + ' ' + text + '</div>');
                 }
