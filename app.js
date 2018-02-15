@@ -231,14 +231,14 @@ var config = {
               scaleID: 'y-axis-0',
               value: '-99999',
               borderColor: 'tomato',
-              borderWidth: 0
+              borderWidth: 1
           },{
               type: 'line',
               mode: 'horizontal',
               scaleID: 'y-axis-0',
               value: '99999',
               borderColor: 'tomato',
-              borderWidth: 2
+              borderWidth: 1
           }],
           drawTime: "afterDraw" // (default)
         },
@@ -253,25 +253,31 @@ config_temperature['options']['title']['text'] = '歷史平均溫度 (℃)';
 config_temperature['options']['scales']['yAxes'][0]['scaleLabel']['labelString'] = 'Temperature';
 config_temperature['options']['scales']['yAxes'][0]['ticks'] = {min: 8, max: 32};
 config_temperature['options']['annotation']['annotations'][0]['value'] = 18; // 喜溫性蔬菜生長最適宜的溫度為18~26℃
+config_temperature['options']['annotation']['annotations'][0]['borderColor'] = 'blue';
 config_temperature['options']['annotation']['annotations'][1]['value'] = 26;
+config_temperature['options']['annotation']['annotations'][1]['borderColor'] = 'red';
 
 var config_rain = $.extend(true, {}, config);
 config_rain['options']['title']['text'] = '歷史平均降雨量 (mm)';
 config_rain['options']['scales']['yAxes'][0]['scaleLabel']['labelString'] = 'Rain';
 config_rain['options']['scales']['yAxes'][0]['ticks'] = {min: 0, max: 900};
 config_rain['options']['annotation']['annotations'][0]['value'] = 130;
+config_rain['options']['annotation']['annotations'][0]['borderColor'] = 'blue';
 config_rain['options']['annotation']['annotations'][1]['value'] = 270;
+config_rain['options']['annotation']['annotations'][1]['borderColor'] = 'red';
 
 var config_sun = $.extend(true, {}, config);
 config_sun['options']['title']['text'] = '歷史平均日射量 (MJ/㎡)';
 config_sun['options']['scales']['yAxes'][0]['scaleLabel']['labelString'] = 'Sun';
 config_sun['options']['scales']['yAxes'][0]['ticks'] = {min: 0, max: 800};
+config_sun['options']['annotation']['annotations'][0]['borderColor'] = 'gold';
 
 var config_td = $.extend(true, {}, config);
 config_td['options']['title']['text'] = '歷史平均露點溫度統計 (℃)';
 config_td['options']['scales']['yAxes'][0]['scaleLabel']['labelString'] = 'Td';
 config_td['options']['scales']['yAxes'][0]['ticks'] = {min: 8, max: 32};
 config_td['options']['annotation']['annotations'][0]['value'] = 18.5; // 霜降 (10月23日或24日) 高地之楓葉亦漸轉紅，常綠植物則是逐漸枯黃掉落，大地略顯得沉重
+config_td['options']['annotation']['annotations'][0]['borderColor'] = 'cornflowerblue';
 
 $(function() {
     $.getJSON(station_url, function(data) {
