@@ -118,6 +118,34 @@ function draw_chart(label, avg_temperature, avg_rain, avg_sun) {
     window.sunLineChart.update();
 }
 
+function shift_left(){
+  config_temperature.data.labels.push(config_temperature.data.labels.shift());
+  config_rain.data.labels.push(config_rain.data.labels.shift());
+  config_sun.data.labels.push(config_sun.data.labels.shift());
+
+  config_temperature.data.datasets[0].data.push(config_temperature.data.datasets[0].data.shift());
+  config_rain.data.datasets[0].data.push(config_rain.data.datasets[0].data.shift());
+  config_sun.data.datasets[0].data.push(config_sun.data.datasets[0].data.shift());
+
+  window.temperatureLineChart.update();
+  window.rainLineChart.update();
+  window.sunLineChart.update();
+}
+
+function shift_right(){
+  config_temperature.data.labels.unshift(config_temperature.data.labels.pop());
+  config_rain.data.labels.unshift(config_rain.data.labels.pop());
+  config_sun.data.labels.unshift(config_sun.data.labels.pop());
+
+  config_temperature.data.datasets[0].data.unshift(config_temperature.data.datasets[0].data.pop());
+  config_rain.data.datasets[0].data.unshift(config_rain.data.datasets[0].data.pop());
+  config_sun.data.datasets[0].data.unshift(config_sun.data.datasets[0].data.pop());
+
+  window.temperatureLineChart.update();
+  window.rainLineChart.update();
+  window.sunLineChart.update();
+}
+
 var station_url = "https://raw.githubusercontent.com/OpenHackFarm/CODiS_carwler/master/CWB_Stations_171226.json";
 var dataset = [];
 var config = {
@@ -280,5 +308,12 @@ $(function() {
 
     $('#clear').click(function() {
         clear_chart();
+    });
+
+    $('#shift_left').click(function() {
+        shift_left();
+    });
+    $('#shift_right').click(function() {
+        shift_right();
     });
 });
