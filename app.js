@@ -44,6 +44,26 @@ function isEmpty(obj) {
     return Object.keys(obj).length === 0;
 }
 
+function isValidURL(url) {
+    var isValid = false;
+
+    $.ajax({
+        url: url,
+        type: "get",
+        async: false,
+        dataType: "json",
+        success: function(data) {
+            isValid = true;
+        },
+        error: function(){
+            isValid = false;
+        }
+    });
+
+    return isValid;
+}
+
+
 function drawBarValues() {
     // render the value of the chart above the bar
     var ctx = this.chart.ctx;
@@ -266,39 +286,57 @@ $(function() {
         label = $('#station').val().split('_')[1] + ' ' + $('#start_year').val() + '~' + $('#end_year').val();
 
         base_url = 'https://raw.githubusercontent.com/OpenHackFarm/CODiS-data/master/STATION_NAME/YEAR.json'
-        year_count = 0;
-        for (var i = $('#start_year').val(); i <= $('#end_year').val(); i++) {
-            new_url = base_url.replace('STATION_NAME', $('#station').val());
-            new_url = new_url.replace('YEAR', i);
-            console.log(new_url);
-
+        new_url = base_url.replace('STATION_NAME', $('#station').val()).replace('YEAR', $('#start_year').val() + '-' + $('#end_year').val());
+        console.log(new_url);
+        if(isValidURL(new_url)){
             $.ajax({
                 url: new_url,
                 type: 'GET',
                 dataType: 'json',
                 async: false,
                 success: function(data) {
-                    if (isEmpty(data)) {
-                        $.notify(i + "無資料", "error");
-                    } else {
-                        $.each(data, function(idx, li) {
-                            month = idx.split('-')[1];
-                            month_temperature[parseInt(month) - 1] += parseFloat(li['Temperature']);
-                            month_rain[parseInt(month) - 1] += parseFloat(li['Precp']);
-                            month_sun[parseInt(month) - 1] += parseFloat(li['GloblRad']);
-                        });
-                    }
+                    $.each(data, function(idx, li) {
+                        avg_temperature[parseInt(idx) - 1] = parseFloat(li['Temperature']);
+                        avg_rain[parseInt(idx) - 1] = parseFloat(li['Precp']);
+                        avg_sun[parseInt(idx) - 1] = parseFloat(li['GloblRad']);
+                    });
                 }
             });
+        } else {
+          year_count = 0;
+          for (var i = $('#start_year').val(); i <= $('#end_year').val(); i++) {
+              new_url = base_url.replace('STATION_NAME', $('#station').val());
+              new_url = new_url.replace('YEAR', i);
+              console.log(new_url);
 
-            year_count = year_count + 1;
-        }
+              $.ajax({
+                  url: new_url,
+                  type: 'GET',
+                  dataType: 'json',
+                  async: false,
+                  success: function(data) {
+                      if (isEmpty(data)) {
+                          $.notify(i + "無資料", "error");
+                      } else {
+                          $.each(data, function(idx, li) {
+                              month = idx.split('-')[1];
+                              month_temperature[parseInt(month) - 1] += parseFloat(li['Temperature']);
+                              month_rain[parseInt(month) - 1] += parseFloat(li['Precp']);
+                              month_sun[parseInt(month) - 1] += parseFloat(li['GloblRad']);
+                          });
+                      }
+                  }
+              });
 
-        // average temperature
-        for (var i = 0; i < 12; i++) {
-            avg_temperature[i] = (month_temperature[i] / year_count).toFixed(1);
-            avg_rain[i] = (month_rain[i] / year_count).toFixed(1);
-            avg_sun[i] = (month_sun[i] / year_count).toFixed(2);
+              year_count = year_count + 1;
+          }
+
+          // average temperature
+          for (var i = 0; i < 12; i++) {
+              avg_temperature[i] = (month_temperature[i] / year_count).toFixed(1);
+              avg_rain[i] = (month_rain[i] / year_count).toFixed(1);
+              avg_sun[i] = (month_sun[i] / year_count).toFixed(2);
+          }
         }
 
         draw_chart(label, avg_temperature, avg_rain, avg_sun);
