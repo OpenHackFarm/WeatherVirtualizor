@@ -67,7 +67,7 @@ function isValidURL(url) {
 function drawBarValues() {
     // render the value of the chart above the bar
     var ctx = this.chart.ctx;
-    ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, 'normal', Chart.defaults.global.defaultFontFamily);
+    ctx.font = Chart.helpers.fontString(14, 'normal', Chart.defaults.global.defaultFontFamily);
     ctx.fillStyle = this.chart.config.options.defaultFontColor;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'bottom';
@@ -196,15 +196,21 @@ var config = {
         responsive: true,
         title: {
             display: true,
-            text: ''
+            text: '',
+            fontSize: 18
         },
         tooltips: {
             mode: 'index',
             intersect: false,
+            titleFontSize: 14,
+            bodyFontSize: 14
         },
         hover: {
             mode: 'nearest',
             intersect: true
+        },
+        legend: {
+            labels: {fontSize: 12}
         },
         scales: {
             xAxes: [{
@@ -212,7 +218,10 @@ var config = {
                 scaleLabel: {
                     display: true,
                     labelString: 'Month'
-                }
+                },
+                ticks: {
+                    fontSize: 14
+                },
             }],
             yAxes: [{
                 display: true,
@@ -220,7 +229,9 @@ var config = {
                     display: true,
                     labelString: ''
                 },
-                ticks: {},
+                ticks: {
+                    fontSize: 14
+                },
             }]
         },
         maintainAspectRatio: false,
