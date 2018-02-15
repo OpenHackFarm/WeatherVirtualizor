@@ -110,6 +110,9 @@ function draw_chart(label, avg_temperature, avg_rain, avg_sun) {
         borderColor: newColor,
     });
 
+    // update middle line (春分、秋分)
+    config_sun.options.annotation.annotations[0].value = (parseFloat(avg_sun[3-1]) + parseFloat(avg_sun[10-1])) / 2;
+
     window.temperatureLineChart.update();
     window.rainLineChart.update();
     window.sunLineChart.update();
@@ -155,6 +158,24 @@ var config = {
             }]
         },
         maintainAspectRatio: false,
+        annotation: {
+          annotations: [{
+              type: 'line',
+              mode: 'horizontal',
+              scaleID: 'y-axis-0',
+              value: '-99999',
+              borderColor: 'tomato',
+              borderWidth: 0
+          },{
+              type: 'line',
+              mode: 'horizontal',
+              scaleID: 'y-axis-0',
+              value: '99999',
+              borderColor: 'tomato',
+              borderWidth: 2
+          }],
+          drawTime: "afterDraw" // (default)
+        },
         animation: {
             onProgress: drawBarValues,
             onComplete: drawBarValues
@@ -170,6 +191,8 @@ var config_rain = $.extend(true, {}, config);
 config_rain['options']['title']['text'] = '歷史降雨量統計 (mm)';
 config_rain['options']['scales']['yAxes'][0]['scaleLabel']['labelString'] = 'Rain';
 config_rain['options']['scales']['yAxes'][0]['ticks'] = {min: 0, max: 900};
+config_rain['options']['annotation']['annotations'][0]['value'] = 130;
+config_rain['options']['annotation']['annotations'][1]['value'] = 270;
 
 var config_sun = $.extend(true, {}, config);
 config_sun['options']['title']['text'] = '歷史日射量統計 (MJ/㎡)';
