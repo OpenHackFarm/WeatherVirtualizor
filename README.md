@@ -10,4 +10,4 @@
 * Compare different year of data.
 
 ### Screenshot
-![](https://raw.githubusercontent.com/OpenHackFarm/weather-history/master/screenshot/screenshot-2018-02-15-11-14-35.png)
+![](https://raw.githubusercontent.com/OpenHackFarm/weather-history/master/screenshot/screenshot-2018-02-15-15-05-46.png)
