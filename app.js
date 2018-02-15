@@ -285,6 +285,8 @@ $(function() {
         $('#start_year').append($("<option></option>").attr("value", i).text(i + ' 年'));
         $('#end_year').append($("<option></option>").attr("value", i).text(i + ' 年'));
     }
+    $('#start_year').val('2005').trigger('change')
+    $('#end_year').val('2017').trigger('change')
 
     $('#start_year').change(function() {
         $('#end_year').val($(this).val()).trigger('change')
