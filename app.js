@@ -11,6 +11,9 @@ function search_nearby_station(address) {
             $.each(data, function(idx, li) {
                 if (li['distance_km'] < 10) {
                     text = li['station_id'] + '_' + li['station_name'] + ' - ' + li['distance_km'] + 'km';
+                    if(rain_stations.indexOf(li['station_id']) > -1) {
+                        text += " (僅雨量)";
+                    }
                     if(li['start_date'] < '2005') {
                       text = '<b>' + text + '</b>';
                     }
